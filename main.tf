@@ -2,7 +2,6 @@
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role
 locals {
   role_name      = "${var.environment}-${var.role_name}"
-  tf_version     = trimspace(chomp(file("./tf_version")))
   module_version = trimspace(chomp(file("./version")))
   last_update    = formatdate("YYYY-MM-DD hh:mm:ss", timestamp())
   tags = merge(var.tags, {
@@ -11,7 +10,6 @@ locals {
     application    = "${var.application}",
     module_name    = "terraform-aws-iam-role",
     module_version = "${local.module_version}",
-    terraform      = "${local.tf_version}",
     last_update    = "${local.last_update}"
   })
 }
